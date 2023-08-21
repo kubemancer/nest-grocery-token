@@ -29,7 +29,7 @@ COPY --from=build --chown=nestjs:nodejs /workspace/node_modules ./node_modules
 # COPY --from=build /workspace/.next/static ./.next/static
 USER nestjs
 RUN echo $(ls)
-EXPOSE 3003
-ENV PORT 3003
+EXPOSE 3001
+ENV PORT 3001
 # ENTRYPOINT ["yarn","start:prod"]
 CMD [ "node", "dist/main.js" ]
