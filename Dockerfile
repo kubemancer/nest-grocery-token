@@ -21,12 +21,23 @@ ENV NODE_ENV production
 # RUN adduser --system --uid 1001 nestjs
 
 WORKDIR /workspace
+COPY . .
 COPY --from=build /workspace/dist ./dist
 COPY --from=build /workspace/node_modules ./node_modules
 # COPY --from=build --chown=nestjs:nodejs /workspace/dist ./dist
 # COPY --from=build --chown=nestjs:nodejs /workspace/node_modules ./node_modules
 # USER nestjs
-EXPOSE 3001
-ENV PORT 3001
-# ENTRYPOINT ["yarn","start:prod"]
-CMD [ "node", "dist/main.js" ]
+EXPOSE 3000
+ENV PORT 3000
+USER root
+ENTRYPOINT ["yarn","start:prod"]
+# WORKDIR /workspace
+# COPY --from=build /workspace/dist ./dist
+# COPY --from=build /workspace/node_modules ./node_modules
+# # COPY --from=build --chown=nestjs:nodejs /workspace/dist ./dist
+# # COPY --from=build --chown=nestjs:nodejs /workspace/node_modules ./node_modules
+# # USER nestjs
+# EXPOSE 3001
+# ENV PORT 3001
+# # ENTRYPOINT ["yarn","start:prod"]
+# CMD [ "node", "dist/main.js" ]
